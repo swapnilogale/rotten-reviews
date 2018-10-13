@@ -7,6 +7,11 @@
     "email": "grikomsn@gmail.com",
     "url": "https://griko.id"
   },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:watch:coverage": "jest test --watch --coverage"
+  },
   "homepage": "https://github.com/grikomsn/rotten-reviews",
   "repository": {
     "type": "url",
@@ -22,5 +27,9 @@
   "bin": {
     "rotten-reviews": "./bin/rotten-reviews.js"
   },
-  "main": "index.js"
+  "main": "index.js",
+  "devDependencies": {
+    "jest": "^23.6.0",
+    "nock": "^10.0.1"
+  }
 }
