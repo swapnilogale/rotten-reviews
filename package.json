@@ -19,6 +19,12 @@
     "commander": "^2.19.0",
     "json2csv": "^4.2.1"
   },
+  "devDependencies": {
+    "pkg": "^4.3.4"
+  },
+  "scripts": {
+    "build": "pkg . --out-path ./build"
+  },
   "bin": {
     "rotten-reviews": "./bin/rotten-reviews.js"
   },
