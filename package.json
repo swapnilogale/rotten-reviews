@@ -7,6 +7,9 @@
     "email": "grikomsn@gmail.com",
     "url": "https://griko.id"
   },
+  "scripts": {
+    "test": "mocha ./test/*.spec.js"
+  },
   "homepage": "https://github.com/grikomsn/rotten-reviews",
   "repository": {
     "type": "url",
@@ -22,5 +25,10 @@
   "bin": {
     "rotten-reviews": "./bin/rotten-reviews.js"
   },
-  "main": "index.js"
+  "main": "index.js",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "nock": "^10.0.1"
+  }
 }
