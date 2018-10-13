@@ -163,10 +163,10 @@ https://www.rottentomatoes.com/carnage_2018/1/reviews/?page=undefined&type=user&
         
         before(async () => {
           nock('https://www.rottentomatoes.com')
-            .get(`/tv/maniac/reviews/?page=1&type=user&sort=`)
+            .get(`/tv/maniac/s01/reviews/?page=1&type=user&sort=`)
             .reply(200, response)
             
-          reviews = await getAudienceReviews('maniac', 1, true)
+          reviews = await getAudienceReviews('maniac/s01', 1, true)
         })
   
         it('Should return an array of reviews',() => {
