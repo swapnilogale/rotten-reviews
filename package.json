@@ -10,7 +10,8 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:watch:coverage": "jest test --watch --coverage"
+    "test:watch:coverage": "jest test --watch --coverage",
+    "build": "pkg . --out-path ./build"
   },
   "homepage": "https://github.com/grikomsn/rotten-reviews",
   "repository": {
@@ -25,17 +26,12 @@
     "commander": "^2.19.0"
   },
   "devDependencies": {
+    "jest": "^23.6.0",
+    "nock": "^10.0.1",
     "pkg": "^4.3.4"
-  },
-  "scripts": {
-    "build": "pkg . --out-path ./build"
   },
   "bin": {
     "rotten-reviews": "./bin/rotten-reviews.js"
   },
-  "main": "index.js",
-  "devDependencies": {
-    "jest": "^23.6.0",
-    "nock": "^10.0.1"
-  }
+  "main": "index.js"
 }
