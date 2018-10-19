@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "npm run test:jest && npm run test:mocha",
-    "test:jest": "jest",
+    "test:jest": "jest index.test.js",
     "test:mocha": "mocha ./test/*.spec.js",
     "test:watch": "jest --watch",
     "test:watch:coverage": "jest test --watch --coverage",
