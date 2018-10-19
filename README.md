@@ -2,6 +2,8 @@
 
 # rotten-reviews
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/rotten-reviews/Lobby)
+
 Scrape audience reviews from [Rotten Tomatoes](https://www.rottentomatoes.com) 🍅
 
 ![rotten-reviews](https://media.giphy.com/media/101t9QwTM6y5oc/giphy.gif)
