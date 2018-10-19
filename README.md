@@ -41,11 +41,9 @@ Scrapes audience movie or tv show reviews from rotten tomatoes
 
 Examples:
   rotten-reviews venom_2018 100
-  rotten-reviews venom_2018 100 --csv
   rotten-reviews doctor_who/s11 10 --tv   (include the season # for tv shows)
 
 Options:
-  --csv       exports to csv (defaults to json)
   --tv        search as a tv show (defaults to movie)
   -h, --help  output usage information
 ```
@@ -117,7 +115,6 @@ You can view more examples by opening the [examples folder](/examples).
 - [`axios`](https://github.com/axios/axios) for fetching webpages
 - [`cheerio`](https://github.com/cheeriojs/cheerio) for scraping the webpage contents
 - [`commander.js`](https://github.com/tj/commander.js) for running this package as a CLI app
-- [`json2csv`](https://github.com/zemirco/json2csv) for converting scraped reviews to CSV on the CLI app
 - [`pkg`](https://github.com/zeit/pkg) for compiling to binaries
 
 ## License
