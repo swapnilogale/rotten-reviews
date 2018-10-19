@@ -37,13 +37,13 @@ yarn global add rotten-reviews
 
 ```console
 $ rotten-reviews
-Usage: rotten-reviews [options] <title> <count>
+Usage: rotten-reviews [options] <title>
 
 Scrapes audience movie or tv show reviews from rotten tomatoes
 
 Examples:
-  rotten-reviews venom_2018 100
-  rotten-reviews doctor_who/s11 10 --tv   (include the season # for tv shows)
+  rotten-reviews venom_2018
+  rotten-reviews doctor_who/s11 --tv   (include the season # for tv shows)
 
 Options:
   --json      exports to json
@@ -54,7 +54,7 @@ Options:
 Here's an example for scraping two [Venom (2018)](https://www.rottentomatoes.com/m/venom_2018/reviews) reviews:
 
 ```console
-$ rotten-reviews venom_2018 2
+$ rotten-reviews venom_2018 --max 2
 Noelle C             I liked it. It wasn't horribly gruesome and the story was pretty good
 3 stars.             considering the challenges of making a Spiderman villain without spiderman. I
 October 17, 2018     thought Eddie was a bit too NEW YORK and San Francisco was a little too clean
