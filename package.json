@@ -16,7 +16,7 @@
   "homepage": "https://github.com/grikomsn/rotten-reviews",
   "repository": {
     "type": "url",
-    "url": "https://github.com/grikomsn/rotten-reviews.git"
+    "url": "git+https://github.com/grikomsn/rotten-reviews.git"
   },
   "license": "MIT",
   "dependencies": {
@@ -33,5 +33,12 @@
   "bin": {
     "rotten-reviews": "./bin/rotten-reviews.js"
   },
-  "main": "index.js"
+  "main": "index.js",
+  "bugs": {
+    "url": "https://github.com/grikomsn/rotten-reviews/issues"
+  },
+  "directories": {
+    "example": "examples"
+  },
+  "keywords": []
 }
