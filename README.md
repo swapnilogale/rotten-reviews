@@ -1,6 +1,7 @@
 <div align="center">
 
 # rotten-reviews
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/rotten-reviews/Lobby)
 
 Scrape audience reviews from [Rotten Tomatoes](https://www.rottentomatoes.com) 🍅
 
