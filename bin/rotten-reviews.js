@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+const columnify = require('columnify')
+
 const Commander = require('commander')
 const RottenReviews = require('..')
 
@@ -15,10 +17,30 @@ Commander.description(description)
   .action((title, count) => {
     RottenReviews.getAudienceReviews(title, count, Commander.tv)
       .then(reviews => {
-        console.log(JSON.stringify(reviews, null, 2))
+        if (Commander.csv) {
+          return console.log(Csv.parse(reviews));
+        }
+        reviews = reviews.map(review => {
+          return {
+            name: `${review.reviewer}\n${review.stars} stars.\n${review.date}`,
+            review: `\n${review.review}\n\n\n\r-`
+          };
+        });
+        const columns = columnify(reviews, {
+          showHeaders: false,
+          preserveNewLines: true,
+          minWidth: 20,
+          config: {
+            review: {
+              maxWidth: 80
+            }
+          }
+        });
+        console.log(columns);
       })
       .catch(error => {
         console.error(error.message)
+        process.exit(1);
       })
   })
   .parse(process.argv)
