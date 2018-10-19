@@ -23,6 +23,12 @@
     "cheerio": "^1.0.0-rc.2",
     "commander": "^2.19.0"
   },
+  "devDependencies": {
+    "pkg": "^4.3.4"
+  },
+  "scripts": {
+    "build": "pkg . --out-path ./build"
+  },
   "bin": {
     "rotten-reviews": "./bin/rotten-reviews.js"
   },
