@@ -50,6 +50,40 @@ const scope = nock(baseURL)
       </div>
     </html>`)
 
+const scope2 = nock(baseURL)
+  .persist()
+  .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
+  .get(`/m/1198124-shutter_island/reviews/`)
+  .query({
+    page: 2,
+    type: 'user'
+  })
+  .reply(200,
+    `<html>
+      <span class="pageInfo">Page 1 of 2</span>
+      <div class="review_table">
+        <div class="row review_table_row">
+          <a class="bold unstyled articleLink">Daniel M</a>
+          <span class="fr small subtle">October 12, 2018</span>
+          <span class="glyphicon glyphicon-star"></span>
+          <span class="glyphicon glyphicon-star"></span>
+          <span class="glyphicon glyphicon-star"></span>
+          <span class="glyphicon glyphicon-star"></span>
+          <div class="user_review">Very cool plot twist at the end, enjoyable movie.</div>
+        </div>
+        <div class="row review_table_row">
+          <a class="bold unstyled articleLink">Ines P</a>
+          <span class="fr small subtle">October 1, 2018</span>
+          <span>
+            <span class="glyphicon glyphicon-star"></span>
+            <span class="glyphicon glyphicon-star"></span>
+            ½
+          </span>
+          <div class="user_review">Uncomfortable length and unrewarding end.</div>
+        </div>
+      </div>
+    </html>`)
+
 Given('that I get the library', function () {
   const { RottenReviews } = this
 })
@@ -62,6 +96,7 @@ When('I try to get the page {string} of the audience reviews of the movie {strin
 
 Then('I see a JSON with a valid result', function () {
   scope.done()
+  scope2.done()
   const got = Object.keys(this.result)
   const want = Object.keys(reviewSample)
   expect(got).toEqual(want)
