@@ -2,7 +2,7 @@ const Axios = require('axios').default
 const Cheerio = require('cheerio')
 
 /**
- * Returns the URL for the given parameters
+ * Returns the movie URL for the given parameters
  *
  * @param {String} slug Identifier for the movie ot TV show
  * @param {Number} page Number or page(s) to be retrieved
@@ -14,6 +14,14 @@ const movieUrl = (slug, page, isTV = false) => {
 }
 
 /**
+ * Returns the search URL for the given parameters
+ *
+ * @param {String} query Search query
+ */
+const searchUrl = query =>
+  `https://www.rottentomatoes.com/api/private/v2.0/search?q=${query}`
+
+/**
  * Fetches the review page for the given parameters
  *
  * @param {String} slug Identifier for the movie ot TV show
@@ -21,6 +29,13 @@ const movieUrl = (slug, page, isTV = false) => {
  * @param {Boolean} isTV State whether given slug is a TV show or not
  */
 const getPage = (slug, page, isTV) => Axios.get(movieUrl(slug, page, isTV))
+
+/**
+ * Fetches the search results for the given parameters
+ *
+ * @param {String} query Search query
+ */
+const getSearchResults = query => Axios.get(searchUrl(query))
 
 /**
  * Scrapes audience reviews (reviewer name, date, stars, and review excerpt)
@@ -64,6 +79,8 @@ const scrapePage = data => {
  * @param {Number} reviewCount Number of requested reviews to be given
  * @param {Boolean} isTV State whether given slug is a TV show or not
  */
+
+
 const getAudienceReviews = async (slug, reviewCount, isTV = false) => {
   let wantedAmountOfReviews = reviewCount
   let maxPage = 1
@@ -132,4 +149,27 @@ const getAudienceReviews = async (slug, reviewCount, isTV = false) => {
     )
 }
 
-module.exports = { getAudienceReviews }
+const getMovieResults = async (query) => {
+  try {
+    const request = await getSearchResults(query)
+    const response = request.data;
+
+    if (response.movieCount === 0) {
+      throw {
+        message: `⚠️  No movies found, please try again.`,
+      }
+    }
+
+    return new Promise(resolve => {
+      const sortedMovies = response.movies.sort((a, b) => a.year - b.year).reverse()
+
+      resolve(sortedMovies)
+    })
+  } catch (err) {
+    throw {
+      message: `⚠️  An error occured, please try again.`,
+    }
+  }
+}
+
+module.exports = { getAudienceReviews, getMovieResults }

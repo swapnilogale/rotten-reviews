@@ -8,9 +8,7 @@
     "npm": ">= 6.4.x"
   },
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:watch:coverage": "jest test --watch --coverage"
+    "build": "pkg . --out-path ./build"
   },
   "homepage": "https://github.com/grikomsn/rotten-reviews",
   "repository": {
@@ -21,20 +19,16 @@
   "dependencies": {
     "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.2",
-    "commander": "^2.19.0"
+    "columnify": "^1.5.4",
+    "commander": "^2.19.0",
+    "inquirer": "^6.2.0"
   },
   "devDependencies": {
-    "pkg": "^4.3.4"
-  },
-  "scripts": {
-    "build": "pkg . --out-path ./build"
+    "jest": "^23.6.0",
+    "nock": "^10.0.1"
   },
   "bin": {
     "rotten-reviews": "./bin/rotten-reviews.js"
   },
-  "main": "index.js",
-  "devDependencies": {
-    "jest": "^23.6.0",
-    "nock": "^10.0.1"
-  }
+  "main": "index.js"
 }
