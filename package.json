@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "npm run jest && npm run cucumber && npm run mocha",
-    "jest": "jest",
+    "jest": "jest index.test.js",
     "cucumber": "cucumber-js features/",
     "mocha": "mocha ./test/*.spec.js",
     "test:watch": "jest --watch",
