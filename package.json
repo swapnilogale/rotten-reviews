@@ -8,7 +8,9 @@
     "npm": ">= 6.4.x"
   },
   "scripts": {
-    "test": "jest",
+    "test": "npm run jest && npm run cucumber",
+    "jest": "jest",
+    "cucumber": "cucumber-js features/",
     "test:watch": "jest --watch",
     "test:watch:coverage": "jest test --watch --coverage",
     "build": "pkg . --out-path ./build"
