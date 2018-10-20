@@ -85,7 +85,7 @@ const scope2 = nock(baseURL)
     </html>`)
 
 Given('that I get the library', function () {
-  const { RottenReviews } = this
+  // nothing to do here
 })
 
 When('I try to get the page {string} of the audience reviews of the movie {string}', function (page, movie) {
