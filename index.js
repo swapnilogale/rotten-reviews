@@ -79,7 +79,6 @@ const scrapePage = data => {
  * @param {Number} reviewCount Number of requested reviews to be given
  * @param {Boolean} isTV State whether given slug is a TV show or not
  */
-
 const getAudienceReviews = async (slug, reviewCount, isTV = false) => {
   let wantedAmountOfReviews = reviewCount
   let maxPage = 1
@@ -153,7 +152,6 @@ const getAudienceReviews = async (slug, reviewCount, isTV = false) => {
  *
  * @param {String} query Used to return a list of movies of the query
  */
-
 const getMovieResults = async (query) => {
   try {
     const request = await getSearchResults(query)
