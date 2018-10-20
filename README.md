@@ -2,9 +2,12 @@
 
 # rotten-reviews
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/grikomsn/rotten-reviews.svg)](https://greenkeeper.io/) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/rotten-reviews/Lobby)
-
 Scrape audience reviews from [Rotten Tomatoes](https://www.rottentomatoes.com) 🍅
+
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/rotten-reviews/Lobby)
+[![Greenkeeper badge](https://badges.greenkeeper.io/grikomsn/rotten-reviews.svg)](https://greenkeeper.io/)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/grikomsn/rotten-reviews.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/grikomsn/rotten-reviews/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/grikomsn/rotten-reviews.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/grikomsn/rotten-reviews/context:javascript)
 
 ![rotten-reviews](https://media.giphy.com/media/101t9QwTM6y5oc/giphy.gif)
 
