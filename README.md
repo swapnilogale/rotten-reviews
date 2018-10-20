@@ -2,7 +2,7 @@
 
 # rotten-reviews
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/rotten-reviews/Lobby)
+[![Greenkeeper badge](https://badges.greenkeeper.io/grikomsn/rotten-reviews.svg)](https://greenkeeper.io/) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/rotten-reviews/Lobby)
 
 Scrape audience reviews from [Rotten Tomatoes](https://www.rottentomatoes.com) 🍅
 
