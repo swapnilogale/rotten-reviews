@@ -8,7 +8,9 @@
     "npm": ">= 6.4.x"
   },
   "scripts": {
-    "test": "jest",
+    "test": "npm run jest && npm run cucumber",
+    "jest": "jest",
+    "cucumber": "cucumber-js features/",
     "test:watch": "jest --watch",
     "test:watch:coverage": "jest test --watch --coverage",
     "build": "pkg . --out-path ./build"
@@ -28,6 +30,8 @@
   "devDependencies": {
     "jest": "^23.6.0",
     "nock": "^10.0.1",
+    "cucumber": "^5.0.2",
+    "expect": "^23.6.0",
     "pkg": "^4.3.4"
   },
   "bin": {
