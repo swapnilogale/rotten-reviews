@@ -13,6 +13,7 @@
     "cucumber": "cucumber-js features/",
     "test:watch": "jest --watch",
     "test:watch:coverage": "jest test --watch --coverage",
+    "test:codecov": "jest & codecov",
     "build": "pkg . --out-path ./build"
   },
   "homepage": "https://github.com/grikomsn/rotten-reviews",
@@ -28,11 +29,16 @@
     "commander": "^2.19.0"
   },
   "devDependencies": {
+    "codecov": "^3.1.0",
     "jest": "^23.6.0",
     "nock": "^10.0.1",
     "cucumber": "^5.0.2",
     "expect": "^23.6.0",
     "pkg": "^4.3.4"
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   },
   "bin": {
     "rotten-reviews": "./bin/rotten-reviews.js"
