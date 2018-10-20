@@ -13,6 +13,7 @@ Examples:
   rotten-reviews doctor_who/s11 10 --tv   (include the season # for tv shows)`
 
 Commander.description(description)
+  .option('--json', 'exports to json')
   .option('--tv', 'search as a tv show (defaults to movie)')
   .option('--max <maximum>', 'set max entries displayed (defaults to 20)', 20)
   .arguments('<title>')
@@ -66,7 +67,9 @@ Commander.description(description)
       })
       .catch(error => {
         console.error(error.message)
+        process.exit(1);
       })
+      console.clear()
   })
   .parse(process.argv)
 
