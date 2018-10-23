@@ -9,7 +9,7 @@ describe('[RottenReviews]', () => {
 
       before(async () => {
         nock('https://www.rottentomatoes.com')
-          .get(`/m/carnage_2018/reviews/?page=1&type=user&sort=`)
+          .get(`/m/carnage_2018/reviews/?page=1&type=user`)
           .reply(500)
         
         try {
@@ -21,25 +21,16 @@ describe('[RottenReviews]', () => {
 
       it('Should return error', () => {
         expect(error).to.not.be.null
-        expect(error).to.be.an('Object')
       })
-
-      it('Error should have property message', () => {
-        expect(error).to.have.property('message')
-      })
-
-      it('Error should have a message informing that an error occured', () => {
-        expect(error.message).to.be.eql('⚠️  An error occured, please try again.')
-      })
-      
     })
 
     context('When movie doesn\'t exist', () => {
       let error
+      let scope
 
       before(async () => {
-        nock('https://www.rottentomatoes.com')
-          .get(`/m/carnage_2018/reviews/?page=1&type=user&sort=`)
+        scope = nock('https://www.rottentomatoes.com')
+          .get(`/m/carnage_2018/reviews/?page=1&type=user`)
           .reply(404)
 
         try {
@@ -49,30 +40,19 @@ describe('[RottenReviews]', () => {
         }
       })
 
+      after(() => scope.done());
+
       it('Should return error', () => {
         expect(error).to.not.be.null
         expect(error).to.be.an('Object')
       })
 
-      it('Error should have properties status and message', () => {
-        expect(error).to.have.property('status')
-        expect(error).to.have.property('message')
-      })
-
-      it('Error should have status 404', () => {
-        expect(error.status).to.be.eql(404)
-      })
-
-      it('Error should have a message informing that movie hasn\'t found', () => {
-        expect(error.message).to.be.eql(`⚠️  Page not found for 'carnage_2018'. You can check the page manually by opening this link:
-https://www.rottentomatoes.com/carnage_2018/1/reviews/?page=undefined&type=user&sort=`
-        )
-      })
     })
 
     context('When movie exists', () => {
       context('When param "TV" is false', () => {
         let reviews
+        let scope
   
         const attrs = {
           reviewer: 'igor costa',
@@ -82,6 +62,7 @@ https://www.rottentomatoes.com/carnage_2018/1/reviews/?page=undefined&type=user&
   
         const response = 
         `<html>
+          <span class="pageInfo">Page 1 of 1</span>
           <div class="review_table_row">
             <div class="col-sm-11 col-xs-24 col-sm-pull-4"> 
               <a class="bold unstyled articleLink" href="/user/id/785903811/">
@@ -102,12 +83,15 @@ https://www.rottentomatoes.com/carnage_2018/1/reviews/?page=undefined&type=user&
         </html>`
         
         before(async () => {
-          nock('https://www.rottentomatoes.com')
-            .get(`/m/venom_2018/reviews/?page=1&type=user&sort=`)
+          scope = nock('https://www.rottentomatoes.com')
+            .persist()
+            .get(`/m/venom_2018/reviews/?page=1&type=user`)
             .reply(200, response)
             
           reviews = await getAudienceReviews('venom_2018', 1)
         })
+
+        after(() => scope.done());
   
         it('Should return an array of reviews',() => {
           expect(reviews).to.be.an('Array')
@@ -142,6 +126,7 @@ https://www.rottentomatoes.com/carnage_2018/1/reviews/?page=undefined&type=user&
   
         const response = 
         `<html>
+          <span class="pageInfo">Page 1 of 1</span>
           <div class="review_table_row">
             <div class="col-sm-11 col-xs-24 col-sm-pull-4"> 
               <a class="bold unstyled articleLink" href="/user/id/785903811/">
@@ -162,12 +147,15 @@ https://www.rottentomatoes.com/carnage_2018/1/reviews/?page=undefined&type=user&
         </html>`
         
         before(async () => {
-          nock('https://www.rottentomatoes.com')
-            .get(`/tv/maniac/s01/reviews/?page=1&type=user&sort=`)
+          scope = nock('https://www.rottentomatoes.com')
+            .persist()
+            .get(`/tv/maniac/s01/reviews/?page=1&type=user`)
             .reply(200, response)
             
           reviews = await getAudienceReviews('maniac/s01', 1, true)
         })
+
+        after(() => scope.done());
   
         it('Should return an array of reviews',() => {
           expect(reviews).to.be.an('Array')
