@@ -132,4 +132,4 @@ const getAudienceReviews = async (slug, reviewCount, isTV = false) => {
     )
 }
 
-module.exports = { getAudienceReviews }
+module.exports = { scrapePage, getAudienceReviews }
