@@ -4,10 +4,10 @@ const { getAudienceReviews, scrapePage } = require('../index')
 
 describe('[RottenReviews]', () => {
   describe('#getAudienceReviews()', () => {
-    context('When unknown error occurs', () => {
+    describe('When unknown error occurs', () => {
       let error
 
-      before(async () => {
+      beforeEach(async () => {
         nock('https://www.rottentomatoes.com')
           .get(`/m/carnage_2018/reviews/?page=1&type=user`)
           .reply(500)
@@ -24,11 +24,11 @@ describe('[RottenReviews]', () => {
       })
     })
 
-    context('When movie doesn\'t exist', () => {
+    describe('When movie doesn\'t exist', () => {
       let error
       let scope
 
-      before(async () => {
+      beforeEach(async () => {
         scope = nock('https://www.rottentomatoes.com')
           .get(`/m/carnage_2018/reviews/?page=1&type=user`)
           .reply(404)
@@ -40,7 +40,7 @@ describe('[RottenReviews]', () => {
         }
       })
 
-      after(() => scope.done());
+      afterEach(() => scope.done());
 
       it('Should return error', () => {
         expect(error).to.not.be.null
@@ -49,8 +49,8 @@ describe('[RottenReviews]', () => {
 
     })
 
-    context('When movie exists', () => {
-      context('When param "TV" is false', () => {
+    describe('When movie exists', () => {
+      describe('When param "TV" is false', () => {
         let reviews
         let scope
   
@@ -82,16 +82,17 @@ describe('[RottenReviews]', () => {
           <div>
         </html>`
         
-        before(async () => {
+        beforeAll(async (done) => {
           scope = nock('https://www.rottentomatoes.com')
             .persist()
             .get(`/m/venom_2018/reviews/?page=1&type=user`)
             .reply(200, response)
             
           reviews = await getAudienceReviews('venom_2018', 1)
-        })
+          done();
+        });
 
-        after(() => scope.done());
+        // afterEach(() => scope.done());
   
         it('Should return an array of reviews',() => {
           expect(reviews).to.be.an('Array')
@@ -115,7 +116,7 @@ describe('[RottenReviews]', () => {
         })
       })
 
-      context('When param "TV" is true', () => {
+      describe('When param "TV" is true', () => {
         let reviews
   
         const attrs = {
@@ -146,16 +147,17 @@ describe('[RottenReviews]', () => {
           <div>
         </html>`
         
-        before(async () => {
+        beforeAll(async (done) => {
           scope = nock('https://www.rottentomatoes.com')
             .persist()
             .get(`/tv/maniac/s01/reviews/?page=1&type=user`)
             .reply(200, response)
             
           reviews = await getAudienceReviews('maniac/s01', 1, true)
+          done();
         })
 
-        after(() => scope.done());
+        // afterEach(() => scope.done());
   
         it('Should return an array of reviews',() => {
           expect(reviews).to.be.an('Array')
@@ -188,7 +190,7 @@ describe('[RottenReviews]', () => {
       review: 'One of the best romcoms I\'ve ever watched.'
     }
     
-    context('When content data doen\'t have any element with class review_table_row', () => {
+    describe('When content data doen\'t have any element with class review_table_row', () => {
       let reviews
 
       const data = 
@@ -208,7 +210,7 @@ describe('[RottenReviews]', () => {
           </div>
         </html>`
 
-      before(() => {
+      beforeEach(() => {
         reviews = scrapePage(data)
       })
 
@@ -217,8 +219,8 @@ describe('[RottenReviews]', () => {
       })
     })
 
-    context('When content data have element with class "review_table_row"', () => {
-      context('When content data have only one review', () => {
+    describe('When content data have element with class "review_table_row"', () => {
+      describe('When content data have only one review', () => {
         let reviews
         const data = 
         `<html>
@@ -239,7 +241,7 @@ describe('[RottenReviews]', () => {
           <div>
         </html>`
 
-        before(() => {
+        beforeEach(() => {
           reviews = scrapePage(data)
         })
   
@@ -264,7 +266,7 @@ describe('[RottenReviews]', () => {
           expect(reviews[0].review).to.be.eql('One of the best romcoms I\'ve ever watched.')
         })
       })
-      context('When content data have more than one reviews', () => {
+      describe('When content data have more than one reviews', () => {
         let reviews
         const data = 
         `<html>
@@ -315,7 +317,7 @@ describe('[RottenReviews]', () => {
           <div>
         </html>`
 
-        before(() => {
+        beforeEach(() => {
           reviews = scrapePage(data)
         })
   
