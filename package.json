@@ -8,7 +8,7 @@
     "npm": ">= 6.4.x"
   },
   "scripts": {
-    "test": "npm run jest && npm run cucumber && npm run mocha",
+    "test": "run-s jest cucumber mocha",
     "jest": "jest index.test.js",
     "cucumber": "cucumber-js features/",
     "mocha": "mocha ./test/*.spec.js",
@@ -29,12 +29,13 @@
     "commander": "^2.19.0"
   },
   "devDependencies": {
-    "jest": "^23.6.0",
     "chai": "^4.2.0",
-    "mocha": "^5.2.0",
-    "nock": "^10.0.1",
     "cucumber": "^5.0.2",
     "expect": "^23.6.0",
+    "jest": "^23.6.0",
+    "mocha": "^5.2.0",
+    "nock": "^10.0.1",
+    "npm-run-all": "^4.1.3",
     "pkg": "^4.3.4"
   },
   "bin": {
