@@ -1,22 +1,75 @@
 #!/usr/bin/env node
 
+const Columnify = require('columnify')
 const Commander = require('commander')
-const Json2CsvParser = require('json2csv').Parser
+const Inquirer = require('inquirer')
 const RottenReviews = require('..')
 
-const Csv = new Json2CsvParser({
-  fields: ['reviewer', 'date', 'stars', 'review'],
-})
+const description = `Scrapes audience movie or tv show reviews from rotten tomatoes
 
-Commander.description('scrapes audience movie reviews from rotten tomatoes')
-  .option('--csv', 'exports to csv (defaults to json)')
-  .arguments('<movie> <pages>')
-  .action((movie, pages) => {
-    RottenReviews.getAudienceReviews(movie, pages).then(reviews => {
-      console.log(
-        Commander.csv ? Csv.parse(reviews) : JSON.stringify(reviews, null, 2)
-      )
-    })
+Examples:
+  rotten-reviews venom_2018
+  rotten-reviews venom_2018 --max 10      (sets max entries to 10)
+  rotten-reviews doctor_who/s11 10 --tv   (include the season # for tv shows)`
+
+Commander.description(description)
+  .option('--json', 'exports to json')
+  .option('--tv', 'search as a tv show (defaults to movie)')
+  .option('--max <maximum>', 'set max entries displayed (defaults to 20)', 20)
+  .arguments('<title>')
+  .action((title) => {
+    RottenReviews.getMovieResults(title)
+      .then(movies => {
+        const mappedMovies = movies.map((movie, i) => `${movie.name} (${movie.year})`)
+
+        Inquirer.prompt([
+          {
+            type: 'rawlist',
+            name: 'movie',
+            message: 'Choose a movie',
+            choices: movies.map((movie, i) => ({ name: `${movie.name} (${movie.year})`, index: i }))
+          }
+        ]).then(answers => {
+          const index = mappedMovies.indexOf(answers.movie)
+
+          RottenReviews.getAudienceReviews(/\/m\/(.*)/.exec(movies[index].url)[1], Commander.max, Commander.tv)
+            .then(reviews => {
+              if (Commander.csv) {
+                return console.log(Csv.parse(reviews));
+              }
+              if (Commander.json) {
+                return console.log(JSON.stringify(reviews, null, 2));
+              }
+              reviews = reviews.map(review => {
+                return {
+                  name: `${review.reviewer}\n${review.stars} stars.\n${review.date}`,
+                  review: `\n${review.review}\n\n\n\r-`
+                };
+              });
+              const columns = Columnify(reviews, {
+                showHeaders: false,
+                preserveNewLines: true,
+                minWidth: 20,
+                config: {
+                  review: {
+                    maxWidth: 80
+                  }
+                }
+              });
+              console.log(columns);
+            })
+            .catch(error => {
+              console.error(error.message)
+              process.exit(1);
+            })
+            console.clear()
+        })
+      })
+      .catch(error => {
+        console.error(error.message)
+        process.exit(1);
+      })
+      console.clear()
   })
   .parse(process.argv)
 

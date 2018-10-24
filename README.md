@@ -1,11 +1,22 @@
+<div align="center">
+
 # rotten-reviews
 
-Scrape audience reviews from Rotten Tomatoes 🍅
+Scrape audience reviews from [Rotten Tomatoes](https://www.rottentomatoes.com) 🍅
+
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/rotten-reviews/Lobby)
+[![Greenkeeper badge](https://badges.greenkeeper.io/grikomsn/rotten-reviews.svg)](https://greenkeeper.io/)
+[![codecov](https://codecov.io/gh/grikomsn/rotten-reviews/branch/master/graph/badge.svg)](https://codecov.io/gh/grikomsn/rotten-reviews)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/grikomsn/rotten-reviews.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/grikomsn/rotten-reviews/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/grikomsn/rotten-reviews.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/grikomsn/rotten-reviews/context:javascript)
+
+![rotten-reviews](https://media.giphy.com/media/101t9QwTM6y5oc/giphy.gif)
+
+</div>
 
 ## Description
 
-This Node.js scrapes Rotten Tomatoes audience reviews pages and scrapes the
-contents by getting the reviewer name, date, total stars, and review excerpt.
+This Node.js package scrapes [Rotten Tomatoes](https://www.rottentomatoes.com) audience reviews pages and scrapes the contents by getting the reviewer name, date, total stars, and review excerpt.
 
 Future features are listed on the [roadmap](#roadmap).
 
@@ -15,54 +26,61 @@ Future features are listed on the [roadmap](#roadmap).
 
 ## Usage
 
-## Running from binaries
+### Running from binaries or global install
 
 All binaries are compiled using [`pkg`](https://github.com/zeit/pkg) using Node.js `v8.12.0`.
-See the [releases page](https://github.com/grikomsn/rotten-reviews/releases) for the binaries' download links.
-
-Example running the binaries on `darwin`:
-
-```console
-$ ./rotten-reviews-macos
-Usage: rotten-reviews [options] <movie> <pages>
-
-scrapes audience movie reviews from rotten tomatoes
-
-Options:
-  --csv       exports to csv (defaults to json)
-  -h, --help  output usage information
-```
-
-## Running from global install (`npm` or `yarn`)
-
-- Install package globally by running:
+See the [releases page](https://github.com/grikomsn/rotten-reviews/releases) for the binaries' download links. `rotten-reviews` can also be installed using `npm` or `yarn` globally by running:
 
 ```sh
 # install using npm
 npm -g i rotten-reviews
 
-# install using npm
+# install using yarn
 yarn global add rotten-reviews
 ```
 
-- Run `rotten-reviews` with the `movieSlug` and `pages` parameter, for example:
+```console
+$ rotten-reviews
+Usage: rotten-reviews [options] <title>
+
+Scrapes audience movie or tv show reviews from rotten tomatoes
+
+Examples:
+  rotten-reviews venom_2018
+  rotten-reviews doctor_who/s11 --tv   (include the season # for tv shows)
+
+Options:
+  --json      exports to json
+  --tv        search as a tv show (defaults to movie)
+  -h, --help  output usage information
+```
+
+Here's an example for scraping two [Venom (2018)](https://www.rottentomatoes.com/m/venom_2018/reviews) reviews:
 
 ```console
-$ rotten-reviews venom_2018 25
-[
-  {
-    "reviewer": "Melissa B",
-    "date": "October 11, 2018",
-    "stars": 5,
-    "review": "I loved it! Didn't expect to like it as much as I did.Some really funny parts and amazing action scenes. Ignore the critics, go see it!"
-  },
-  {
-    "reviewer": "Andrew O",
-    "date": "October 11, 2018",
-    "stars": 2.5,
-    "review": "Despite a surprising amount of humor and chemistry between Venom and his host, Venom is mostly inept as both an action and a horror film, with only the slightest amount of soul peering through the thoughtful characterization of Hardy's role. This is a movie you can enjoy while watching and forget the moment you're done."
-  },
-...
+$ rotten-reviews venom_2018 --max 2
+Noelle C             I liked it. It wasn't horribly gruesome and the story was pretty good
+3 stars.             considering the challenges of making a Spiderman villain without spiderman. I
+October 17, 2018     thought Eddie was a bit too NEW YORK and San Francisco was a little too clean
+                     and not filled with weirdos to be realistic, but if I think of it like a
+                     cartoon, it was perfect.
+
+
+                     -
+Chris S              Saw this last night, and enjoyed it very much. Not sure why the critics loathe
+4 stars.             it so bad. It's an anti-hero movie. The interaction between Venom and Brock is
+October 17, 2018     hilarious. Tom Hardy plays the broken man very well. There were several moments
+                     where the jokes had the entire theater laugh at the same time. The action and
+                     pacing of the movie are good. Professional critics are too full of themselves.
+                     They expect an action flick to be Oscar level, when literally nobody else does.
+
+
+                     -
+Jeremy C             The critics were too hard on the film, very much worth going to see. My dad and
+5 stars.             I loved it.
+October 17, 2018
+
+                     -
 ```
 
 ### Running from package
@@ -73,7 +91,7 @@ $ rotten-reviews venom_2018 25
   # install using npm
   npm i rotten-reviews
 
-  # install using npm
+  # install using yarn
   yarn add rotten-reviews
   ```
 
@@ -83,44 +101,41 @@ $ rotten-reviews venom_2018 25
   // import the package
   const RottenReviews = require('rotten-reviews')
 
-  // https://www.rottentomatoes.com/m/venom_2018/reviews
+  // https://www.rottentomatoes.com/m/venom_2018
+  //                                  ^^^^^^^^^^
   const movieSlug = 'venom_2018'
 
-  // get 500 reviews (20 per page * 25)
-  const pages = 25
+  // obtain 3 audience reviews
+  const reviewCount = 3
 
-  // get using the getAudienceReviews function
-  RottenReviews.getAudienceReviews(movieSlug, pages).then(reviews => {
-    console.log(JSON.stringify(reviews, null, 4))
-  })
+  // determines whether is a tv show or not,
+  // optional and defaults to false
+  const isTV = false
+
+  // scrapes the review pages and returns via promise
+  RottenReviews.getAudienceReviews(movieSlug, reviewCount, isTV).then(
+    reviews => {
+      console.log(JSON.stringify(reviews, null, 3))
+    }
+  )
   ```
 
-- Here's the result of the source code above:
-
-  ```json
-  [
-      {
-          "reviewer": "Melissa B",
-          "date": "October 11, 2018",
-          "stars": 5,
-          "review": "I loved it! Didn't expect to like it as much as I did.Some really funny parts and amazing action scenes. Ignore the critics, go see it!"
-      },
-      ...
-  ]
-  ```
+You can view more examples by opening the [examples folder](/examples).
 
 ## Roadmap
 
-- [ ] Scrape defined number of reviews instead of pages
-- [ ] Error handling if movie page doesn't exist
-- [ ] Include scraping TV series reviews
+### [Version 1.1.0](https://github.com/grikomsn/rotten-reviews/milestone/1)
+
+- [x] Scrape defined number of reviews instead of pages ([#6](https://github.com/grikomsn/rotten-reviews/pull/6))
+- [x] Error handling if movie page doesn't exist ([#2](https://github.com/grikomsn/rotten-reviews/pull/2))
+- [x] Include scraping TV series reviews ([#8](https://github.com/grikomsn/rotten-reviews/pull/8))
 
 ## Credits
 
 - [`axios`](https://github.com/axios/axios) for fetching webpages
 - [`cheerio`](https://github.com/cheeriojs/cheerio) for scraping the webpage contents
 - [`commander.js`](https://github.com/tj/commander.js) for running this package as a CLI app
-- [`json2csv`](https://github.com/zemirco/json2csv) for converting scraped reviews to CSV on the CLI app
+- [`columnify`](https://github.com/timoxley/columnify) for prettifying the CLI output
 - [`pkg`](https://github.com/zeit/pkg) for compiling to binaries
 
 ## License
