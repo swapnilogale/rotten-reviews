@@ -1,7 +1,7 @@
 {
   "name": "rotten-reviews",
   "description": "Scrape audience reviews from Rotten Tomatoes 🍅",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Griko Nibras <grikomsn@gmail.com> (https://griko.id)",
   "engines": {
     "node": ">= 8.12.x",
