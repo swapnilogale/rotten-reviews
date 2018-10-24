@@ -175,4 +175,5 @@ const getMovieResults = async (query) => {
   }
 }
 
-module.exports = { getAudienceReviews, getMovieResults }
+module.exports = { scrapePage, getAudienceReviews, getMovieResults }
+
