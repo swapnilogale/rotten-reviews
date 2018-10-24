@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const columnify = require('columnify')
-
+const Columnify = require('columnify')
 const Commander = require('commander')
+const Inquirer = require('inquirer')
 const RottenReviews = require('..')
 
 const description = `Scrapes audience movie or tv show reviews from rotten tomatoes
@@ -18,31 +18,52 @@ Commander.description(description)
   .option('--max <maximum>', 'set max entries displayed (defaults to 20)', 20)
   .arguments('<title>')
   .action((title) => {
-    RottenReviews.getAudienceReviews(title, Commander.max, Commander.tv)
-      .then(reviews => {
-        if (Commander.csv) {
-          return console.log(Csv.parse(reviews));
-        }
-        if (Commander.json) {
-          return console.log(JSON.stringify(reviews, null, 2));
-        }
-        reviews = reviews.map(review => {
-          return {
-            name: `${review.reviewer}\n${review.stars} stars.\n${review.date}`,
-            review: `\n${review.review}\n\n\n\r-`
-          };
-        });
-        const columns = columnify(reviews, {
-          showHeaders: false,
-          preserveNewLines: true,
-          minWidth: 20,
-          config: {
-            review: {
-              maxWidth: 80
-            }
+    RottenReviews.getMovieResults(title)
+      .then(movies => {
+        const mappedMovies = movies.map((movie, i) => `${movie.name} (${movie.year})`)
+
+        Inquirer.prompt([
+          {
+            type: 'rawlist',
+            name: 'movie',
+            message: 'Choose a movie',
+            choices: movies.map((movie, i) => ({ name: `${movie.name} (${movie.year})`, index: i }))
           }
-        });
-        console.log(columns);
+        ]).then(answers => {
+          const index = mappedMovies.indexOf(answers.movie)
+
+          RottenReviews.getAudienceReviews(/\/m\/(.*)/.exec(movies[index].url)[1], Commander.max, Commander.tv)
+            .then(reviews => {
+              if (Commander.csv) {
+                return console.log(Csv.parse(reviews));
+              }
+              if (Commander.json) {
+                return console.log(JSON.stringify(reviews, null, 2));
+              }
+              reviews = reviews.map(review => {
+                return {
+                  name: `${review.reviewer}\n${review.stars} stars.\n${review.date}`,
+                  review: `\n${review.review}\n\n\n\r-`
+                };
+              });
+              const columns = Columnify(reviews, {
+                showHeaders: false,
+                preserveNewLines: true,
+                minWidth: 20,
+                config: {
+                  review: {
+                    maxWidth: 80
+                  }
+                }
+              });
+              console.log(columns);
+            })
+            .catch(error => {
+              console.error(error.message)
+              process.exit(1);
+            })
+            console.clear()
+        })
       })
       .catch(error => {
         console.error(error.message)
