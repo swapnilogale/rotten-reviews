@@ -1,0 +1,23 @@
+{
+  "name": "rotten-reviews",
+  "description": "Scrape audience reviews from Rotten Tomatoes 🍅",
+  "version": "2.0.0",
+  "repository": "https://github.com/ninetwenty-one/rotten-reviews.git",
+  "author": "Griko Nibras <griko@ninetwenty.one> (https://ninetwenty.one)",
+  "main": "index.js",
+  "keywords": [
+    "rotten-reviews",
+    "rotten-tomatoes",
+    "scrape-audience-reviews",
+    "scraper",
+    "scraping-websites",
+    "scraping"
+  ],
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "isomorphic-fetch": "^2.2.1",
+    "strict-uri-encode": "^2.0.0"
+  },
+  "devDependencies": {},
+  "license": "MIT"
+}
