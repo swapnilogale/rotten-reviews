@@ -4,6 +4,8 @@
 
 Scrape audience reviews from [Rotten Tomatoes][rotten-tomatoes] 🍅
 
+[![NPM version](https://img.shields.io/npm/v/rotten-reviews.svg)](https://www.npmjs.com/package/rotten-reviews)
+[![NPM download count](https://img.shields.io/npm/dt/rotten-reviews.svg)](https://www.npmjs.com/package/rotten-reviews)
 [![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)][spectrum]
 
 [![Rotten GIF](https://media.giphy.com/media/101t9QwTM6y5oc/giphy.gif)][spectrum]
@@ -21,12 +23,16 @@ Note that this package doesn't use official packages or API endpoints provided b
 
 ## Usage
 
-### Search titles using [`searchByQuery`](examples/searchByQuery.js)
+### Search titles using `searchByQuery`
 
 - Script
 
   ```js
+  // using require (commonjs)
   const { searchByQuery } = require('rotten-reviews')
+
+  // using import (es module)
+  import { searchByQuery } from 'rotten-reviews'
 
   searchByQuery('venom').then(results => {
     console.log(JSON.stringify(results, null, 2))
@@ -49,25 +55,22 @@ Note that this package doesn't use official packages or API endpoints provided b
       "type": "m",
       "slug": "m/venom"
     },
-    {
-      "title": "Venom",
-      "year": 2013,
-      "type": "m",
-      "slug": "m/venom_2013"
-    },
     ...
   ]
   ```
 
-### Fetch reviews using [`scrapeReviews`](examples/scrapeReviews.js)
+### Fetch reviews using `scrapeReviews`
 
 - Script
 
   ```js
+  // using require (commonjs)
   const { scrapeReviews } = require('rotten-reviews')
-  const slug = 'm/venom_2018'
 
-  scrapeReviews(slug).then(results => {
+  // using import (es module)
+  import { scrapeReviews } from 'rotten-reviews'
+
+  scrapeReviews('m/venom_2018').then(results => {
     console.log(JSON.stringify(results, null, 2))
   })
   ```
@@ -88,12 +91,6 @@ Note that this package doesn't use official packages or API endpoints provided b
       "stars": 4,
       "review": "Critics be damned, I liked it. Lots of action, and it doesn't take itself too seriously. Venom was given a bit of personality rather than being a glorified sticky suit."
     },
-    {
-      "reviewer": "Ricardo B",
-      "date": "December 19, 2018",
-      "stars": 5,
-      "review": "Great movie! Eddie was a very relatable character and his relationship with Venom is unique. The film was entertaining throughout. I Can't believe themovie did poorly on rotten tomatoes... I like how Eddie was all over the place with his new identity. Hero or villain, Venom was great and I can't wait for him to eat more heads off in the future. The new Spiderman and Venom would be hysterical together."
-    },
     ...
   ]
   ```
@@ -109,8 +106,10 @@ Haven't done this part. Do [submit a pull request](https://github.com/ninetwenty
 ## Credits
 
 - [`cheeriojs/cheerio`][cheerio]
-- [`matthew-andrews/isomorphic-fetch`][isomorphic-fetch]
 - [`kevva/strict-uri-encode`][strict-uri-encode]
+- [`matthew-andrews/isomorphic-fetch`][isomorphic-fetch]
+- [`prettier/prettier`][prettier]
+- [`rollup/rollup`][rollup]
 
 ## License
 
@@ -118,6 +117,8 @@ MIT
 
 [cheerio]: https://github.com/cheeriojs/cheerio
 [isomorphic-fetch]: https://github.com/matthew-andrews/isomorphic-fetch
+[prettier]: https://github.com/prettier/prettier
+[rollup]: https://github.com/rollup/rollup
 [rotten-reviews-cli]: https://github.com/ninetwenty-one/rotten-reviews-cli
 [rotten-tomatoes]: https://www.rottentomatoes.com
 [spectrum]: https://spectrum.chat/ninetwenty-one/rotten-reviews
