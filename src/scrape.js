@@ -1,14 +1,14 @@
 const {
+  BASE_URL,
   MAX_REVIEWS_PER_PAGE,
   MAX_TOTAL_REVIEWS,
   MAX_VISITABLE_PAGE,
 } = require('./defaults')
 
 const createUrlFromSlug = (slug, pageNumber = 1) => {
-  const baseUrl = 'https://www.rottentomatoes.com'
   const page = Math.min(Math.max(1, pageNumber), MAX_VISITABLE_PAGE)
 
-  return `${baseUrl}/${slug}/reviews/?page=${page}&type=user&sort=`
+  return `${BASE_URL}/${slug}/reviews/?page=${page}&type=user&sort=`
 }
 
 const scrapeFromPageUrl = async url => {
