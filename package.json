@@ -1,11 +1,12 @@
 {
   "name": "rotten-reviews",
   "description": "Scrape audience reviews from Rotten Tomatoes 🍅",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "repository": "https://github.com/ninetwenty-one/rotten-reviews.git",
   "author": "Griko Nibras <griko@ninetwenty.one> (https://ninetwenty.one)",
-  "main": "dist/index.js",
-  "module": "src/index.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "src"
@@ -27,7 +28,13 @@
     "strict-uri-encode": "^2.0.0"
   },
   "devDependencies": {
-    "rollup": "^0.68.1"
+    "@types/cheerio": "^0.22.10",
+    "@types/isomorphic-fetch": "^0.0.34",
+    "@types/strict-uri-encode": "^2.0.0",
+    "rollup": "^0.68.1",
+    "rollup-plugin-typescript2": "^0.18.1",
+    "tslib": "^1.9.3",
+    "typescript": "^3.2.2"
   },
   "license": "MIT"
 }

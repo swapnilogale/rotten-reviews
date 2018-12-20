@@ -18,10 +18,26 @@ This Node.js package fetches [Rotten Tomatoes][rotten-tomatoes] audience reviews
 
 - Search movie or TV show titles
 - Fetch whole audience reviews or by defined value
+- Compiled from Typescript to CommonJS and ES modules
+- Declaration file available
 
 Note that this package doesn't use official packages or API endpoints provided by RT.
 
 ## Usage
+
+### Adding to your project
+
+- Using `npm`
+
+  ```sh
+  npm install rotten-reviews
+  ```
+
+- Using `yarn`
+
+  ```sh
+  yarn add rotten-reviews
+  ```
 
 ### Search titles using `searchByQuery`
 
@@ -105,21 +121,27 @@ Haven't done this part. Do [submit a pull request](https://github.com/ninetwenty
 
 ## Credits
 
-- [`cheeriojs/cheerio`][cheerio]
-- [`kevva/strict-uri-encode`][strict-uri-encode]
-- [`matthew-andrews/isomorphic-fetch`][isomorphic-fetch]
-- [`prettier/prettier`][prettier]
-- [`rollup/rollup`][rollup]
+- [`cheerio`][cheerio]
+- [`isomorphic-fetch`][isomorphic-fetch]
+- [`rollup-plugin-typescript2`][rollup-plugin-typescript2]
+- [`rollup`][rollup]
+- [`strict-uri-encode`][strict-uri-encode]
+- [`tslib`][tslib]
+- [`typescript`][typescript]
+- ...and its [type definitions][definitely-typed]
 
 ## License
 
 MIT
 
 [cheerio]: https://github.com/cheeriojs/cheerio
+[definitely-typed]: https://github.com/DefinitelyTyped/DefinitelyTyped
 [isomorphic-fetch]: https://github.com/matthew-andrews/isomorphic-fetch
-[prettier]: https://github.com/prettier/prettier
+[rollup-plugin-typescript2]: https://github.com/ezolenko/rollup-plugin-typescript2
 [rollup]: https://github.com/rollup/rollup
 [rotten-reviews-cli]: https://github.com/ninetwenty-one/rotten-reviews-cli
 [rotten-tomatoes]: https://www.rottentomatoes.com
 [spectrum]: https://spectrum.chat/ninetwenty-one/rotten-reviews
 [strict-uri-encode]: https://github.com/kevva/strict-uri-encode
+[typescript]: https://github.com/Microsoft/TypeScript
+[tslib]: https://github.com/Microsoft/tslib
