@@ -1,0 +1,12 @@
+{
+  "name": "@rotten-reviews/demo",
+  "description": "Example usage for rotten-reviews package 🍅",
+  "version": "1.0.0",
+  "author": "Griko Nibras <griko@ninetwenty.one> (https://ninetwenty.one)",
+  "main": "index.js",
+  "dependencies": {
+    "rotten-reviews": "^2.2.0"
+  },
+  "license": "MIT",
+  "private": true
+}
