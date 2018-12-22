@@ -1,10 +1,7 @@
 {
   "groups": {
     "default": {
-      "packages": [
-        "demo/package.json",
-        "package.json"
-      ]
+      "packages": ["demo/package.json", "package.json"]
     }
   }
 }

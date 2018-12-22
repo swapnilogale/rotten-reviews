@@ -5,7 +5,8 @@
 Scrape audience reviews from [Rotten Tomatoes][rotten-tomatoes] 🍅
 
 [![NPM version](https://img.shields.io/npm/v/rotten-reviews.svg)](https://www.npmjs.com/package/rotten-reviews)
-[![NPM download count](https://img.shields.io/npm/dt/rotten-reviews.svg)](https://www.npmjs.com/package/rotten-reviews) [![Greenkeeper badge](https://badges.greenkeeper.io/ninetwenty-one/rotten-reviews.svg)](https://greenkeeper.io/)
+[![NPM download count](https://img.shields.io/npm/dt/rotten-reviews.svg)](https://www.npmjs.com/package/rotten-reviews)
+[![Greenkeeper badge](https://badges.greenkeeper.io/ninetwenty-one/rotten-reviews.svg)](https://greenkeeper.io/)
 [![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)][spectrum]
 
 [![Rotten GIF](https://media.giphy.com/media/101t9QwTM6y5oc/giphy.gif)][spectrum]
