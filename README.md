@@ -8,6 +8,7 @@ Scrape audience reviews from [Rotten Tomatoes][rotten-tomatoes] 🍅
 [![NPM download count](https://img.shields.io/npm/dt/rotten-reviews.svg)](https://www.npmjs.com/package/rotten-reviews)
 [![Greenkeeper badge](https://badges.greenkeeper.io/ninetwenty-one/rotten-reviews.svg)](https://greenkeeper.io/)
 [![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)][spectrum]
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fninetwenty-one%2Frotten-reviews.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fninetwenty-one%2Frotten-reviews?ref=badge_shield)
 
 [![Rotten GIF](https://media.giphy.com/media/101t9QwTM6y5oc/giphy.gif)][spectrum]
 
@@ -174,3 +175,6 @@ MIT
 [strict-uri-encode]: https://github.com/kevva/strict-uri-encode
 [typescript]: https://github.com/Microsoft/TypeScript
 [tslib]: https://github.com/Microsoft/tslib
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fninetwenty-one%2Frotten-reviews.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fninetwenty-one%2Frotten-reviews?ref=badge_large)
